@@ -1,4 +1,7 @@
 # Ignore binaries
+bin/**
+!bin/aasm.sh
+!bin/run_docker.sh
 
 # Ignore compiled KMD files and main graphics binary
 *kmd

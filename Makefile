@@ -1,10 +1,17 @@
 # Do all
-all: jimulator kcmd
-
+all: aasm jimulator kcmd
 
 kcmd: src/kcmdSrc/kcmd.cpp
-	g++ src/kcmdSrc/kcmd.cpp -o bin/kcmd -std=c++17 -pthread
+	g++ $^ -o bin/kcmd -std=c++17 -pthread
 
 # Compile the jimulator binary.
 jimulator: src/jimulatorSrc/jimulator.cpp
-	g++ -w -o bin/jimulator src/jimulatorSrc/jimulator.cpp -Wall -Wextra -O3 -std=c++17
+	g++ $^ -w -o bin/jimulator -Wall -Wextra -O3 -std=c++17
+
+# Compile aasm binary.
+aasm: src/aasmSrc/aasm.c
+	gcc -w -O2 -o bin/aasm $^
+	cp src/aasmSrc/mnemonics bin/mnemonics
+
+clean:
+	rm bin/{jimulator,aasm,kcmd,mnemonics}
